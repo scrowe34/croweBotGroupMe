@@ -16,14 +16,10 @@ async function respond()
   if(request.text && request.text.startsWith("Crowebot"))
   {
     const response = await openai.createCompletion({
-      model: "code-davinci-002",
-      prompt: request.text+"?",
-      temperature: 0,
-      max_tokens: 60,
-      top_p: 1.0,
-      frequency_penalty: 0.5,
-      presence_penalty: 0.0,
-      stop: ["You:"],
+      model: "text-ada-001",
+      prompt: request.text.slice(8)+"?",
+      temperature: 0.7,
+      max_tokens: 1000
     });
     this.res.writeHead(200);
     postMessage(response);
