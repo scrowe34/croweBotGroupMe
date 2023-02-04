@@ -10,21 +10,31 @@ const openai = new OpenAIApi(configuration);
 
 
 
-async function respond() 
+function respond() 
 {
   var request = JSON.parse(this.req.chunks[0]);
   if(request.text && request.text.startsWith("Crowebot"))
   {
-    const response = await openai.createCompletion({
-      model: "text-ada-001",
-      prompt: request.text.slice(8)+"?",
-      temperature: 0.7,
-      max_tokens: 1000
-    });
-    this.res.writeHead(200);
-    postMessage(response);
-    this.res.end();
+    openAIResponse(request.text).then(
+      
+      function(value) {
+        this.res.writeHead(200);
+        postMessage( value);
+        this.res.end();
+      }
+      
+    )
+    
   } 
+}
+async function openAIResponse(message){
+  let response = await openai.createCompletion({
+    model: "text-ada-001",
+    prompt: message.slice(8)+"?",
+    temperature: 0.7,
+    max_tokens: 1000
+  });
+  return response;
 }
 
 function postMessage(response) 
