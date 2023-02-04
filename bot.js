@@ -8,7 +8,7 @@ async function respond()
   if(request.text && request.text.startsWith("Are"))
   {
       postMessage("sync");
-      await botCall(request.text);
+     // await botCall(request.text);
   } 
 }
 
