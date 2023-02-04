@@ -15,15 +15,15 @@ function respond()
   var request = JSON.parse(this.req.chunks[0]);
   if(request.text && request.text.startsWith("Crowebot"))
   {
-    openAIResponse(request.text).then(
+    //openAIResponse(request.text).then(
       
-      function(value) {
+     // function(value) {
         this.res.writeHead(200);
         postMessage( value);
         this.res.end();
-      }
+     // }
       
-    )
+   // )
     
   } 
 }
