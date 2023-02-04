@@ -8,9 +8,10 @@ async function respond()
   if(request.text && request.text.startsWith("Are"))
   {
     
-      this.res.writeHead(200);
-      botCall(request.text);
-      this.res.end();
+      //this.res.writeHead(200);
+      //botCall(request.text);
+      postMessage("yes");
+      //this.res.end();
     
   } 
 }
