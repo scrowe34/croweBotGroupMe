@@ -34,6 +34,7 @@ async function openAIResponse(message){
     temperature: 0.7,
     max_tokens: 1000
   });
+  console.log(response);
   return response;
 }
 
