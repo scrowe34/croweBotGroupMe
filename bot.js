@@ -10,14 +10,14 @@ const openai = new OpenAIApi(configuration);
 
 
 
-function respond() 
+async function respond() 
 {
   var request = JSON.parse(this.req.chunks[0]);
-  if(request.text && request.text=="A")
+  if(request.text && request.text.startsWith("Crowebot"))
   {
     const response = await openai.createCompletion({
       model: "code-davinci-002",
-      prompt: "You: How do I combine arrays?\nJavaScript chatbot: You can use the concat() method.\nYou: How do you make an alert appear after 10 seconds?\nJavaScript chatbot",
+      prompt: request.text+"?",
       temperature: 0,
       max_tokens: 60,
       top_p: 1.0,
@@ -26,7 +26,7 @@ function respond()
       stop: ["You:"],
     });
     this.res.writeHead(200);
-    postMessage("Fuck the Indians");
+    postMessage(response);
     this.res.end();
   } 
 }
