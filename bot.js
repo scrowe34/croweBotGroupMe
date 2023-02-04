@@ -2,14 +2,13 @@ var HTTPS = require('https');
 var botID = process.env.BOT_ID;
 
 
-function respond() 
+async function respond() 
 {
   var request = JSON.parse(this.req.chunks[0]);
   if(request.text && request.text.startsWith("Are"))
   {
-      postMessage("sync")
-      botCall(request.text);
-      //postMessage("yes");    
+      postMessage("sync");
+      await botCall(request.text);
   } 
 }
 
