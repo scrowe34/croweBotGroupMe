@@ -7,8 +7,8 @@ async function respond()
   var request = JSON.parse(this.req.chunks[0]);
   if(request.text && request.text.startsWith("Are"))
   {
-      //botCall(request.text);
-      postMessage("yes");    
+      botCall(request.text);
+      //postMessage("yes");    
   } 
 }
 
@@ -54,6 +54,7 @@ function postMessage(response)
 }
 
 async function botCall(text) {
+  postMessage("trying");
    try {
      const response = await fetch("/api/generate", {
        method: "POST",
@@ -65,6 +66,7 @@ async function botCall(text) {
 
      const data = await response.json();
      if (response.status !== 200) {
+      postMessage(data.error);
        throw data.error || new Error(`Request failed with status ${response.status}`);
      }
   
