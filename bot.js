@@ -8,10 +8,9 @@ const configuration = new Configuration({
 });
 const openai = new OpenAIApi(configuration);
 
-
-
 function respond() 
 {
+  console.log("hey you fuck");
   var request = JSON.parse(this.req.chunks[0]);
   if(request.text && request.text.startsWith("Crowebot"))
   {
