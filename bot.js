@@ -19,7 +19,7 @@ function respond()
       
       function(value) {
         this.res.writeHead(200);
-        postMessage( value);
+        postMessage(value);
         this.res.end();
       }
       
