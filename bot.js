@@ -10,7 +10,11 @@ const openai = new OpenAIApi(configuration);
 
 function respond() 
 {
+<<<<<<< HEAD
   console.log("hey you fuck");
+=======
+  console.log("hey you");
+>>>>>>> 68cc467db6edf7bed68ce236eede0e27e272056c
   var request = JSON.parse(this.req.chunks[0]);
   if(request.text && request.text.startsWith("Crowebot"))
   {
