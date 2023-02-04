@@ -1,43 +1,17 @@
 var HTTPS = require('https');
 var botID = process.env.BOT_ID;
 
-const { Configuration, OpenAIApi } = require("openai");
-
-const configuration = new Configuration({
-  apiKey: process.env.OPENAI_API_KEY,
-});
-const openai = new OpenAIApi(configuration);
 
 async function respond() 
 {
   var request = JSON.parse(this.req.chunks[0]);
   if(request.text && request.text.startsWith("Are"))
   {
-    try {
-      const completion = await openai.createCompletion({
-        model: "text-ada-001",
-        prompt: request.text + "?",
-        temperature: 0.6,
-        max_tokens: 500
-      });
-      res.status(200).json({ result: completion.data.choices[0].text });
+    
       this.res.writeHead(200);
-      postMessage(completion.data.choices[0].text);
+      botCall(request.text);
       this.res.end();
-    } catch(error) {
-      // Consider adjusting the error handling logic for your use case
-      if (error.response) {
-        console.error(error.response.status, error.response.data);
-        res.status(error.response.status).json(error.response.data);
-      } else {
-        console.error(`Error with OpenAI API request: ${error.message}`);
-        res.status(500).json({
-          error: {
-            message: 'An error occurred during your request.',
-          }
-        });
-      }
-    } 
+    
   } 
 }
 
@@ -81,5 +55,30 @@ function postMessage(response)
   });
   botReq.end(JSON.stringify(body));
 }
+
+async function botCall(text) {
+  // event.preventDefault();
+   try {
+     const response = await fetch("/api/generate", {
+       method: "POST",
+       headers: {
+         "Content-Type": "application/json",
+       },
+       body: JSON.stringify({ ask: text }),
+     });
+
+     const data = await response.json();
+     if (response.status !== 200) {
+       throw data.error || new Error(`Request failed with status ${response.status}`);
+     }
+  
+    postMessage(data.result);
+  
+   } catch(error) {
+     // Consider implementing your own error handling logic here
+     console.error(error);
+     alert(error.message);
+   }
+ }
 
 exports.respond = respond;
