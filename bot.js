@@ -7,12 +7,8 @@ async function respond()
   var request = JSON.parse(this.req.chunks[0]);
   if(request.text && request.text.startsWith("Are"))
   {
-    
-      //this.res.writeHead(200);
       //botCall(request.text);
-      postMessage("yes");
-      //this.res.end();
-    
+      postMessage("yes");    
   } 
 }
 
@@ -58,7 +54,6 @@ function postMessage(response)
 }
 
 async function botCall(text) {
-  // event.preventDefault();
    try {
      const response = await fetch("/api/generate", {
        method: "POST",
