@@ -1,6 +1,6 @@
 {
   "name": "node-js-getting-started",
-  "version": "0.1.2",
+  "version": "19.3.0",
   "description": "A sample Node.js app using Express 4",
   "main": "index.js",
   "scripts": {
@@ -12,7 +12,7 @@
     "openai": "^3.1.0"
   },
   "engines": {
-    "node": "0.10.x"
+    "node": "19.3.0"
   },
   "repository": {
     "type": "git",
