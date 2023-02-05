@@ -20,6 +20,7 @@ async function respond()
 
 function contextGroupMe(groupId, message){
   postMessage(groupId);
+  let data = '';
   options = 
   {
     hostname: 'api.groupme.com',
@@ -28,7 +29,6 @@ function contextGroupMe(groupId, message){
   };
   botReq = HTTPS.request(options, function(res) 
   { 
-    let data = '';
     res.on('data', (chunk) => {
         data = data + chunk.toString();
     });
