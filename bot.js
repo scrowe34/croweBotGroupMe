@@ -25,7 +25,7 @@ function contextGroupMe(groupId, message){
     path: '/v3/groups/'+groupId+'/messages',
     method: 'GET'
   };
-  botReq = HTTPS.request(options, function(res) 
+  botReq = HTTPS.get(options, function(res) 
   { 
     postMessage(JSON.stringify(res));
       if(res.statusCode == 202) {
