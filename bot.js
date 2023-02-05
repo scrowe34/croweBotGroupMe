@@ -30,9 +30,12 @@ function contextGroupMe(groupId, message){
       if(res.statusCode == 200) {
         let messages = res.response.messages;
         messages.reverse();
-        let context = "";
+        let context ='';
+        for (var i = 0; i < messages.length; i++) {
+          context += messages[i].text + " ";
+        }
         
-        postMessage(messages.4.text);
+        postMessage(context);
       } else {
         console.log('rejecting bad status code ' + res.statusCode);
       }
