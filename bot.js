@@ -17,7 +17,7 @@ async function respond()
     //postMessage(request.group_id);
   } 
 }
-
+//https://stackoverflow.com/questions/19539391/how-to-get-data-out-of-a-node-js-http-get-request
 function contextGroupMe(groupId, message){
   postMessage(groupId);
   let data = '';
@@ -28,30 +28,24 @@ function contextGroupMe(groupId, message){
     method: 'GET'
   };
   botReq = HTTPS.request(options, function(res) 
-  { 
-    res.on('data', (chunk) => {
-        data = data + chunk.toString();
-    });
-  
-    res.on('end', () => {
-        const body = JSON.parse(data);
-        postMessage("body");
-    });
-
-    // postMessage(JSON.stringify(res));
-    //   if(res.statusCode == 202) {
-    //     // let messages = res.response.messages;
-    //     // messages.reverse();
-    //     // let context ='';
-    //     // for (var i = 0; i < messages.length; i++) {
-    //     //   context += messages[i].text + " ";
-    //     // }
-        
-    //     //postMessage(JSON.stringify(res));
-    //   } else {
-    //     console.log('rejecting bad status code ' + res.statusCode);
-    //   }
+  {
+    if(res.statusCode == 202) {
+    } else {
+      console.log('rejecting bad status code ' + res.statusCode);
+    }
+});
+botReq.on('data', function (chunk) {
+  data += chunk;
+});
+botReq.on('error', function(err)
+  {
+    console.log('error posting message '  + JSON.stringify(err));
   });
+  botReq.on('timeout', function(err) {
+    console.log('timeout posting message '  + JSON.stringify(err));
+  });
+  botReq.end(postMessage(JSON.stringify(data)));
+  
 
 
 }
