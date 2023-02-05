@@ -25,21 +25,32 @@ function contextGroupMe(groupId, message){
     path: '/v3/groups/'+groupId+'/messages',
     method: 'GET'
   };
-  botReq = HTTPS.get(options, function(res) 
+  botReq = HTTPS.request(options, function(res) 
   { 
-    postMessage(JSON.stringify(res));
-      if(res.statusCode == 202) {
-        // let messages = res.response.messages;
-        // messages.reverse();
-        // let context ='';
-        // for (var i = 0; i < messages.length; i++) {
-        //   context += messages[i].text + " ";
-        // }
+
+    let data = '';
+    res.on('data', (chunk) => {
+        data = data + chunk.toString();
+    });
+  
+    res.on('end', () => {
+        const body = JSON.parse(data);
+        postMessage(body);
+    });
+
+    // postMessage(JSON.stringify(res));
+    //   if(res.statusCode == 202) {
+    //     // let messages = res.response.messages;
+    //     // messages.reverse();
+    //     // let context ='';
+    //     // for (var i = 0; i < messages.length; i++) {
+    //     //   context += messages[i].text + " ";
+    //     // }
         
-        //postMessage(JSON.stringify(res));
-      } else {
-        console.log('rejecting bad status code ' + res.statusCode);
-      }
+    //     //postMessage(JSON.stringify(res));
+    //   } else {
+    //     console.log('rejecting bad status code ' + res.statusCode);
+    //   }
   });
 
 
