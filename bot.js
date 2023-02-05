@@ -54,29 +54,31 @@ function postMessage(response)
 }
 
 async function botCall(text) {
-  postMessage("trying");
-   try {
-     const response = await fetch("/api/generate", {
-       method: "POST",
-       headers: {
-         "Content-Type": "application/json",
-       },
-       body: JSON.stringify({ ask: text }),
-     });
+  postMessage("trying to prompt "+text);
 
-     const data = await response.json();
-     if (response.status !== 200) {
-      postMessage(data.error);
-       throw data.error || new Error(`Request failed with status ${response.status}`);
-     }
+
+  //  try {
+  //    const response = await fetch("/api/generate", {
+  //      method: "POST",
+  //      headers: {
+  //        "Content-Type": "application/json",
+  //      },
+  //      body: JSON.stringify({ ask: text }),
+  //    });
+
+  //    const data = await response.json();
+  //    if (response.status !== 200) {
+  //     //postMessage(data.error);
+  //      throw data.error || new Error(`Request failed with status ${response.status}`);
+  //    }
   
-    postMessage(data.result);
+  //   postMessage(data.result);
   
-   } catch(error) {
-     // Consider implementing your own error handling logic here
-     console.error(error);
-     alert(error.message);
-   }
+  //  } catch(error) {
+  //    // Consider implementing your own error handling logic here
+  //    console.error(error);
+  //    alert(error.message);
+  //  }
  }
 
 exports.respond = respond;
