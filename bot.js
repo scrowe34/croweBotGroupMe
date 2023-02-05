@@ -57,7 +57,7 @@ function postMessage(response)
 
 async function botCall(text) {
   const completion = await openai.createCompletion({
-    model: "text-ada-001",
+    model: "text-davinci-003",
     prompt: text.slice(9) + "?",
   });
   postMessage(completion.data.choices[0].text.replace(/(\r\n|\n|\r)/gm, ""));
