@@ -1,5 +1,13 @@
 var HTTPS = require('https');
 var botID = process.env.BOT_ID;
+const { Configuration, OpenAIApi } = require("openai");
+
+const configuration = new Configuration({
+  apiKey: process.env.OPENAI_API_KEY,
+});
+const openai = new OpenAIApi(configuration);
+
+
 
 
 async function respond() 
@@ -55,6 +63,11 @@ function postMessage(response)
 
 async function botCall(text) {
   postMessage("trying to prompt "+text);
+  const completion = await openai.createCompletion({
+    model: "text-ada-001",
+    prompt: text,
+  });
+  postMessage(completion.data.choices[0].text);
 
 
   //  try {
