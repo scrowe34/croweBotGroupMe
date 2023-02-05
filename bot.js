@@ -26,10 +26,11 @@ function contextGroupMe(groupId, message){
     method: 'GET'
   };
   botReq = HTTPS.request(options, function(res) 
-  {
-      if(res.statusCode == 200) {
-        let messages = res.response.messages;
-        messages.reverse();
+  { 
+    postMessage(JSON.stringify(res));
+      if(res.statusCode == 202) {
+        // let messages = res.response.messages;
+        // messages.reverse();
         // let context ='';
         // for (var i = 0; i < messages.length; i++) {
         //   context += messages[i].text + " ";
