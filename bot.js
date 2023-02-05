@@ -15,7 +15,6 @@ async function respond()
   var request = JSON.parse(this.req.chunks[0]);
   if(request.text && request.text.startsWith("Crowebot"))
   {
-    //postMessage("prompting" + request.text);
     botCall(request.text);
   } 
 }
@@ -45,7 +44,6 @@ function postMessage(response)
   botReq = HTTPS.request(options, function(res) 
   {
       if(res.statusCode == 202) {
-        //neat
       } else {
         console.log('rejecting bad status code ' + res.statusCode);
       }
@@ -68,30 +66,6 @@ async function botCall(text) {
     prompt: text.slice(8) + "?",
   });
   postMessage(completion.data.choices[0].text.replace(/(\r\n|\n|\r)/gm, ""));
-
-
-  //  try {
-  //    const response = await fetch("/api/generate", {
-  //      method: "POST",
-  //      headers: {
-  //        "Content-Type": "application/json",
-  //      },
-  //      body: JSON.stringify({ ask: text }),
-  //    });
-
-  //    const data = await response.json();
-  //    if (response.status !== 200) {
-  //     //postMessage(data.error);
-  //      throw data.error || new Error(`Request failed with status ${response.status}`);
-  //    }
-  
-  //   postMessage(data.result);
-  
-  //  } catch(error) {
-  //    // Consider implementing your own error handling logic here
-  //    console.error(error);
-  //    alert(error.message);
-  //  }
  }
 
 exports.respond = respond;
