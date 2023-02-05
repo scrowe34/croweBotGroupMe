@@ -13,7 +13,7 @@ const openai = new OpenAIApi(configuration);
 async function respond() 
 {
   var request = JSON.parse(this.req.chunks[0]);
-  if(request.text && request.text.startsWith("Are"))
+  if(request.text && request.text.startsWith("Crowebot"))
   {
     //postMessage("prompting" + request.text);
     botCall(request.text);
@@ -62,12 +62,12 @@ function postMessage(response)
 }
 
 async function botCall(text) {
-  postMessage("trying to prompt "+text);
+  postMessage("beepbop prompting "+text.slice(8) + "?");
   const completion = await openai.createCompletion({
     model: "text-ada-001",
-    prompt: text,
+    prompt: text.slice(8) + "?",
   });
-  postMessage(completion.data.choices[0].text);
+  postMessage(completion.data.choices[0].text.replace(/(\r\n|\n|\r)/gm, ""));
 
 
   //  try {
