@@ -7,9 +7,6 @@ const configuration = new Configuration({
 });
 const openai = new OpenAIApi(configuration);
 
-
-
-
 async function respond() 
 {
   var request = JSON.parse(this.req.chunks[0]);
@@ -18,7 +15,6 @@ async function respond()
     botCall(request.text);
   } 
 }
-
 
 function postMessage(response) 
 {
@@ -60,10 +56,9 @@ function postMessage(response)
 }
 
 async function botCall(text) {
-  postMessage("beepbop prompting "+text.slice(8) + "?");
   const completion = await openai.createCompletion({
     model: "text-ada-001",
-    prompt: text.slice(8) + "?",
+    prompt: text.slice(9) + "?",
   });
   postMessage(completion.data.choices[0].text.replace(/(\r\n|\n|\r)/gm, ""));
  }
