@@ -36,7 +36,7 @@ function contextGroupMe(groupId, message){
         //   context += messages[i].text + " ";
         // }
         
-        postMessage(JSON.stringify(res));
+        //postMessage(JSON.stringify(res));
       } else {
         console.log('rejecting bad status code ' + res.statusCode);
       }
