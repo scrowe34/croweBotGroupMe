@@ -7,7 +7,7 @@ async function respond()
   var request = JSON.parse(this.req.chunks[0]);
   if(request.text && request.text.startsWith("Are"))
   {
-    postMessage("prompting" + request.text);
+    //postMessage("prompting" + request.text);
     botCall(request.text);
   } 
 }
