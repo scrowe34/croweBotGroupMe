@@ -31,8 +31,8 @@ function contextGroupMe(groupId, message){
         let messages = res.response.messages;
         messages.reverse();
         let context = "";
-        messages.forEach(i => context += i.name + ":" + i.text + ";");
-        postMessage(context)
+        
+        postMessage(messages[4].text);
       } else {
         console.log('rejecting bad status code ' + res.statusCode);
       }
