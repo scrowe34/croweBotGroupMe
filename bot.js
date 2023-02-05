@@ -12,9 +12,9 @@ async function respond()
   var request = JSON.parse(this.req.chunks[0]);
   if(request.text && request.text.startsWith("Crowebot"))
   {
-    //contextGroupMe(request.group_id, request.text)
+    contextGroupMe(request.group_id, request.text)
     //botCall(request.text);
-    postMessage(request.group_id);
+    //postMessage(request.group_id);
   } 
 }
 
@@ -28,7 +28,11 @@ function contextGroupMe(groupId, message){
   botReq = HTTPS.request(options, function(res) 
   {
       if(res.statusCode == 200) {
-        
+        let messages = res.response.messages;
+        messages.reverse();
+        let context = "";
+        messages.forEach(i => context += i.name + ":" + i.text + ";");
+        postMessage(context)
       } else {
         console.log('rejecting bad status code ' + res.statusCode);
       }
