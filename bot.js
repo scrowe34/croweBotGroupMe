@@ -32,7 +32,7 @@ function contextGroupMe(groupId, message){
         messages.reverse();
         let context = "";
         
-        postMessage(messages[4].text);
+        postMessage(messages.4.text);
       } else {
         console.log('rejecting bad status code ' + res.statusCode);
       }
