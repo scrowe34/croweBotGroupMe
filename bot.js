@@ -12,8 +12,29 @@ async function respond()
   var request = JSON.parse(this.req.chunks[0]);
   if(request.text && request.text.startsWith("Crowebot"))
   {
-    botCall(request.text);
+    //contextGroupMe(request.group_id, request.text)
+    //botCall(request.text);
+    postMessage(request.group_id);
   } 
+}
+
+function contextGroupMe(groupId, message){
+  options = 
+  {
+    hostname: 'api.groupme.com',
+    path: '/v3/groups/'+groupId+'/messages',
+    method: 'GET'
+  };
+  botReq = HTTPS.request(options, function(res) 
+  {
+      if(res.statusCode == 200) {
+        
+      } else {
+        console.log('rejecting bad status code ' + res.statusCode);
+      }
+  });
+
+
 }
 
 function postMessage(response) 
