@@ -28,7 +28,6 @@ function contextGroupMe(groupId, message){
   };
   botReq = HTTPS.request(options, function(res) 
   { 
-    postMessage(groupId);
     let data = '';
     res.on('data', (chunk) => {
         data = data + chunk.toString();
@@ -36,7 +35,7 @@ function contextGroupMe(groupId, message){
   
     res.on('end', () => {
         const body = JSON.parse(data);
-        postMessage(body);
+        postMessage("body");
     });
 
     // postMessage(JSON.stringify(res));
