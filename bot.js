@@ -10,14 +10,17 @@ const openai = new OpenAIApi(configuration);
 async function respond() 
 {
   var request = JSON.parse(this.req.chunks[0]);
-  if(request.text && request.text.startsWith("Crowebot") && !request.text.startsWith("Crowebot2"))
+  if(request.text && request.text.startsWith("Crowebot"))
   {
     //contextGroupMe(request.group_id, request.text)
-    botCall(request.text);
-    //postMessage(request.group_id);
-  }else if(request.text && request.text.startsWith("Crowebot2")){
-    imageBot(request.text);
-  }
+    if(request.text.startsWith("Crowebot2")){
+      imageBot(request.text);
+
+    }else{
+      botCall(request.text);
+
+    }
+  
 }
 //https://stackoverflow.com/questions/19539391/how-to-get-data-out-of-a-node-js-http-get-request
 function contextGroupMe(groupId, message){
