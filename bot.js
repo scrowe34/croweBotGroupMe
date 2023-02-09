@@ -12,8 +12,8 @@ async function respond()
   var request = JSON.parse(this.req.chunks[0]);
   if(request.text && request.text.startsWith("Crowebot"))
   {
-    contextGroupMe(request.group_id, request.text)
-    //botCall(request.text);
+    //contextGroupMe(request.group_id, request.text)
+    botCall(request.text);
     //postMessage(request.group_id);
   } 
 }
