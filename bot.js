@@ -15,7 +15,9 @@ async function respond()
     //contextGroupMe(request.group_id, request.text)
     botCall(request.text);
     //postMessage(request.group_id);
-  } 
+  }else if(request.text && request.text.startsWith("Crowebot2")){
+    imageBot(request.text);
+  }
 }
 //https://stackoverflow.com/questions/19539391/how-to-get-data-out-of-a-node-js-http-get-request
 function contextGroupMe(groupId, message){
@@ -88,7 +90,16 @@ function postMessage(response)
   });
   botReq.end(JSON.stringify(body));
 }
+async function imageBot(text){
+  const response = await openai.createImage({
+    prompt: text.slice(10),
+    n: 1,
+    size: "1024x1024",
+  });
+  image_url = response.data.data[0].url;
+  postMessage(image_url);
 
+}
 async function botCall(text) {
   const completion = await openai.createCompletion({
     model: "text-davinci-003",
