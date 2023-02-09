@@ -20,6 +20,7 @@ async function respond()
       botCall(request.text);
 
     }
+  }
   
 }
 //https://stackoverflow.com/questions/19539391/how-to-get-data-out-of-a-node-js-http-get-request
