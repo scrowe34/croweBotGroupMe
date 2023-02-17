@@ -110,7 +110,7 @@ async function botCall(text) {
     prompt: text.slice(9) + "?",
     max_tokens : 2500
   });
-  postMessage(completion.data.choices[0].text.replace(/(\r\n|\n|\r)/gm, ""));
+  postMessage(completion.data.choices[0].text.replace(/(?<=[^\r\n])\r?\n|\r/g, ""));
  }
 
 exports.respond = respond;
