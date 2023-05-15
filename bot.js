@@ -24,7 +24,7 @@ async function respond()
   
 }
 //https://stackoverflow.com/questions/19539391/how-to-get-data-out-of-a-node-js-http-get-request
-function contextGroupMe(groupId, message){
+/**function contextGroupMe(groupId, message){
   postMessage(groupId);
   let data = '';
   options = 
@@ -54,7 +54,7 @@ botReq.on('error', function(err)
   
 
 
-}
+}**/
 
 function postMessage(response) 
 {
